@@ -1,15 +1,23 @@
+package oneTwo;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class ExampleJFrame extends JFrame {
     ExampleJFrame(){
+        setTitle("Example Title");
+        setSize(900, 600); // sets size x,y
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(true); // prevent resizing
+        setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
 
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         jPanel.setBackground(Color.gray);
+
 
         JLabel label = new JLabel("Insert example text:");
         jPanel.add(label);
@@ -28,14 +36,8 @@ public class ExampleJFrame extends JFrame {
 
         JTextArea textArea = new JTextArea(40,20);
 
-        setTitle("Example Title");
-        setSize(900, 600); // sets size x,y
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(true); // prevent resizing
-        setLayout(new BorderLayout());
         add(jPanel, BorderLayout.NORTH);
         add(textArea, BorderLayout.CENTER);
-        setLocationRelativeTo(null);
 
         button.addActionListener(new ActionListener() {
             @Override
@@ -69,6 +71,14 @@ public class ExampleJFrame extends JFrame {
         JComboBox<String> comboBoxPlacement = new JComboBox<>(optionsPlacement);
         jDialog.add(new Label("Placement:"));
         jDialog.add(comboBoxPlacement);
+
+
+        SpinnerModel spinnerModel = new SpinnerNumberModel(35, 35, 200, 1);
+
+        jDialog.add(new Label("Height:"));
+        JSpinner jSpinner = new JSpinner(spinnerModel);
+        jDialog.add(jSpinner);
+
 
         JButton buttonSubmit = new JButton("Submit");
         jDialog.add(buttonSubmit);
@@ -110,11 +120,20 @@ public class ExampleJFrame extends JFrame {
                     }
                 }
 
+                if ((int) jSpinner.getValue() != 0){
+                    jPanel.setPreferredSize(new Dimension(getWidth(),(int) jSpinner.getValue()));
+                }
+
                 setVisible(true);
                 jDialog.setVisible(false);
 
             }
         });
+
+        
+
+
+
 
     }
 }
