@@ -138,7 +138,7 @@ public class CalculatorFrame implements ActionListener {
                         afterEqlButton();
                     }
                     else{
-                        textField.setText("Division by 0");
+                        textField.setText("0");
                     }
                     break;
                 default:
@@ -151,6 +151,7 @@ public class CalculatorFrame implements ActionListener {
     private void afterEqlButton(){
         number1 = result;
         textField.setText(String.valueOf(result));
+        operator = " ";
     }
 
     public void setFrameVisible(boolean x){
