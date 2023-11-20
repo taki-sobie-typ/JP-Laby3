@@ -7,7 +7,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class InputDialog extends JFrame{
-    ArrayList<Contact> contactArrayList = new ArrayList<Contact>();
+    public ArrayList<Contact> getContactArrayList() {
+        return contactArrayList;
+    }
+
+    private ArrayList<Contact> contactArrayList = new ArrayList<Contact>();
 
     InputDialog(){
         setTitle("Enter contact!");
@@ -32,6 +36,9 @@ public class InputDialog extends JFrame{
 
         JButton submitContactButton = new JButton("SUBMIT");
         add(submitContactButton);
+
+        JButton deleteContactButton = new JButton("DELETE");
+        add(deleteContactButton);
         submitContactButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,6 +47,22 @@ public class InputDialog extends JFrame{
                     phoneField.setText("");
                     eMailField.setText("");
                     ContactList.refreshTable();
+            }
+        });
+
+        deleteContactButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for(int i=0;i<contactArrayList.size();i++){
+                    if(contactArrayList.get(i).getName().equals(nameField.getText())){
+                        contactArrayList.remove(i);
+                        break;
+                    }
+                }
+                ContactList.refreshTable();
+                nameField.setText("");
+                phoneField.setText("");
+                eMailField.setText("");
             }
         });
     }
