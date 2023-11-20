@@ -12,6 +12,7 @@ public class PasswordChecker extends JFrame implements ActionListener {
     PasswordChecker(){
         setTitle("Password Strength checker");
         setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
         JPanel passwordStatus = new JPanel();
         add(passwordStatus, BorderLayout.NORTH);
         setSize(600, 200);
