@@ -2,8 +2,6 @@ package six;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class InputDialog extends JFrame{
@@ -11,7 +9,7 @@ public class InputDialog extends JFrame{
         return contactArrayList;
     }
 
-    private ArrayList<Contact> contactArrayList = new ArrayList<Contact>();
+    private final ArrayList<Contact> contactArrayList = new ArrayList<>();
 
     InputDialog(){
         setTitle("Enter contact!");
@@ -39,36 +37,26 @@ public class InputDialog extends JFrame{
 
         JButton deleteContactButton = new JButton("DELETE");
         add(deleteContactButton);
-        submitContactButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                    contactArrayList.add(new Contact(nameField.getText(),phoneField.getText(),eMailField.getText()));
-                    nameField.setText("");
-                    phoneField.setText("");
-                    eMailField.setText("");
-                    ContactList.refreshTable();
-            }
-        });
-
-        deleteContactButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for(int i=0;i<contactArrayList.size();i++){
-                    if(contactArrayList.get(i).getName().equals(nameField.getText())){
-                        contactArrayList.remove(i);
-                        break;
-                    }
-                }
-                ContactList.refreshTable();
+        submitContactButton.addActionListener(e -> {
+                contactArrayList.add(new Contact(nameField.getText(),phoneField.getText(),eMailField.getText()));
                 nameField.setText("");
                 phoneField.setText("");
                 eMailField.setText("");
-            }
+                ContactList.refreshTable();
         });
-    }
 
-    public void message(String message){
-        JOptionPane.showMessageDialog(null, message, "Message", JOptionPane.PLAIN_MESSAGE);
+        deleteContactButton.addActionListener(e -> {
+            for(int i=0;i<contactArrayList.size();i++){
+                if(contactArrayList.get(i).name().equals(nameField.getText())){
+                    contactArrayList.remove(i);
+                    break;
+                }
+            }
+            ContactList.refreshTable();
+            nameField.setText("");
+            phoneField.setText("");
+            eMailField.setText("");
+        });
     }
 
     public void showInputDialog(boolean condition){

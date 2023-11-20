@@ -4,8 +4,8 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class ContactTableModel extends AbstractTableModel {
-    private ArrayList<Contact> peopleList;
-    private String[] columnNames = {"Name", "Last Name", "Email"};
+    private final ArrayList<Contact> peopleList;
+    private final String[] columnNames = {"Name", "Last Name", "Email"};
 
     public ContactTableModel(ArrayList<Contact> peopleList) {
         this.peopleList = peopleList;
@@ -25,16 +25,12 @@ public class ContactTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Contact person = peopleList.get(rowIndex);
 
-        switch (columnIndex) {
-            case 0:
-                return person.getName();
-            case 1:
-                return person.getPhone();
-            case 2:
-                return person.getEmail();
-            default:
-                return null;
-        }
+        return switch (columnIndex) {
+            case 0 -> person.name();
+            case 1 -> person.phone();
+            case 2 -> person.email();
+            default -> null;
+        };
     }
 
     @Override

@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 public class ContactList implements ActionListener {
     private static final InputDialog inputDialog = new InputDialog();
     private static final JFrame contactListMainWindow = new JFrame();
-    private final String[] columnNames = {"Name","Phone","Email"};
     private static final JTable table = new JTable(new ContactTableModel(inputDialog.getContactArrayList()));
     private static final JScrollPane scrollPane = new JScrollPane(table);
     ContactList(){
